@@ -9,7 +9,10 @@ const app = express();
 app.use(express.json());
 
 // Add GET HTTP Method to "/" endpoint
-app.get('/', (req, res) => res.send(JSON.stringify({ message: "Hello, World!" })));
+app.get('/', (req, res) => {
+    res.contentType('application/json');
+    res.send(JSON.stringify({ message: "Hello, World!" }));
+});
 
 // Create PORT
 const port = process.env.PORT || 3000;
