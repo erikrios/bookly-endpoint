@@ -7,3 +7,6 @@ const app = express();
 
 // Add JSON middleware
 app.use(express.json());
+
+// Add GET HTTP Method to "/" endpoint
+app.get('/', (req, res) => res.send(JSON.stringify({ message: "Hello, World!" })));
