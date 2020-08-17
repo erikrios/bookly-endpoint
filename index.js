@@ -78,17 +78,43 @@ app.get('/api/books', (req, res) => {
     res.send(JSON.stringify(books));
 });
 
-// Add GET HTTP Method to "api/books/:id" endpoint
+// Add GET HTTP Method to "/api/books/:id" endpoint
 app.get('/api/books/:id', (req, res) => {
     res.contentType('application/json');
     const id = req.params.id;
     const result = books.find(book => book.id === parseInt(id));
+
     if (!result) {
-        res.status('404');
+        res.status(404);
         res.send(JSON.stringify({ error: `Book with id ${id} not found!` }));
         return;
     }
+
     res.send(JSON.stringify(result));
+});
+
+// Add POST HTTP Method to "/api/books"
+app.post('/api/books', (req, res) => {
+    const book = req.body;
+    const { error } = validate(book);
+
+    if (error) {
+        res.status(400);
+        res.send(error.details[0]);
+        return;
+    }
+
+    books.push(
+        {
+            id: books.length + 1,
+            title: book.title,
+            author: book.author,
+            publisher: book.publisher
+        }
+    );
+
+    res.contentType('application/json');
+    res.send(books);
 });
 
 // Create PORT
