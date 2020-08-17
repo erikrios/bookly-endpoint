@@ -93,7 +93,7 @@ app.get('/api/books/:id', (req, res) => {
     res.send(JSON.stringify(result));
 });
 
-// Add POST HTTP Method to "/api/books"
+// Add POST HTTP Method to "/api/books" endpoint
 app.post('/api/books', (req, res) => {
     const book = req.body;
     const { error } = validate(book);
@@ -115,6 +115,51 @@ app.post('/api/books', (req, res) => {
 
     res.contentType('application/json');
     res.send(books);
+});
+
+// Add PUT HTTP Method to "/api/books/:id" endpoint
+app.put('/api/books/:id', (req, res) => {
+    res.contentType('application/json');
+    const id = req.params.id;
+    const result = books.find(book => book.id === parseInt(id));
+
+    if (!result) {
+        res.status(404);
+        res.send(JSON.stringify({ error: `Book with id ${id} not found!` }));
+        return;
+    }
+
+    const book = req.body;
+    const { error } = validate(book);
+
+    if (error) {
+        res.status(400);
+        res.send(error.details[0]);
+        return;
+    }
+
+    result.title = book.title;
+    result.author = book.author;
+    result.publisher = book.publisher;
+
+    res.send(books);
+});
+
+// Add DELETE HTTP Method to "/api/books/:id" endpoint
+app.delete('/api/books/:id', (req, res) => {
+    const id = req.params.id;
+    const result = books.find(book => book.id === parseInt(id));
+
+    if (!result) {
+        res.status(404);
+        res.send(JSON.stringify({ error: `Book with id ${id} not found!` }));
+        return;
+    }
+
+    const index = books.indexOf(result);
+    books.splice(index, 1);
+
+    res.send(result);
 });
 
 // Create PORT
