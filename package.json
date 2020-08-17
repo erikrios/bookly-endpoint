@@ -1,0 +1,24 @@
+{
+  "name": "bookly-endpoint",
+  "version": "1.0.0",
+  "description": "Simple Book CRUD (Create, Read, Update, and Delete) RESTful API Using Express.js and Node.js ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erikrios/bookly-endpoint.git"
+  },
+  "keywords": [
+    "express-js",
+    "node-js",
+    "joi"
+  ],
+  "author": "Erik Rio Setiawan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erikrios/bookly-endpoint/issues"
+  },
+  "homepage": "https://github.com/erikrios/bookly-endpoint#readme"
+}
