@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/erikrios/bookly-endpoint/issues"
   },
-  "homepage": "https://github.com/erikrios/bookly-endpoint#readme"
+  "homepage": "https://github.com/erikrios/bookly-endpoint#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
