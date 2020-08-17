@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 const books = [
-    {   
+    {
         id: 1,
         title: "Coders at Work : Reflections on the Craft of Programming",
         author: [
@@ -76,7 +76,20 @@ app.get('/', (req, res) => {
 app.get('/api/books', (req, res) => {
     res.contentType('application/json');
     res.send(JSON.stringify(books));
-})
+});
+
+// Add GET HTTP Method to "api/books/:id" endpoint
+app.get('/api/books/:id', (req, res) => {
+    res.contentType('application/json');
+    const id = req.params.id;
+    const result = books.find(book => book.id === parseInt(id));
+    if (!result) {
+        res.status('404');
+        res.send(JSON.stringify({ error: `Book with id ${id} not found!` }));
+        return;
+    }
+    res.send(JSON.stringify(result));
+});
 
 // Create PORT
 const port = process.env.PORT || 3000;
