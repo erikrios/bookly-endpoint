@@ -94,3 +94,14 @@ app.get('/api/books/:id', (req, res) => {
 // Create PORT
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server running on port ${port}...`));
+
+// Add a function to validate the book
+const validate = book => {
+    const schema = {
+        title: Joi.string().min(3).required(),
+        author: Joi.array().min(1).required(),
+        publisher: Joi.string().min(3).required()
+    }
+
+    return Joi.validate(book, schema);
+}
