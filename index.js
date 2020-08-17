@@ -4,3 +4,6 @@ const Joi = require('joi');
 
 // Create the instance of express
 const app = express();
+
+// Add JSON middleware
+app.use(express.json());
