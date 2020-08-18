@@ -134,7 +134,7 @@ router.put('/:id', (req, res) => {
 });
 
 // Add DELETE HTTP Method to "/api/books/:id" endpoint
-router.delete(':id', (req, res) => {
+router.delete('/:id', (req, res) => {
     const id = req.params.id;
     const result = books.find(book => book.id === parseInt(id));
 
