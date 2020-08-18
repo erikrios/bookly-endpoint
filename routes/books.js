@@ -159,3 +159,5 @@ const validate = book => {
 
     return Joi.validate(book, schema);
 }
+
+module.exports = router;
