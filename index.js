@@ -2,11 +2,17 @@
 const express = require('express');
 const Joi = require('joi');
 
+// Import home routes
+const home = require('./routes/home');
+
 // Create the instance of express
 const app = express();
 
 // Add JSON middleware
 app.use(express.json());
+
+// Add home routes middleware
+app.use('/', home);
 
 const books = [
     {
@@ -65,12 +71,6 @@ const books = [
         publisher: "O'REILLY"
     }
 ]
-
-// Add GET HTTP Method to "/" endpoint
-app.get('/', (req, res) => {
-    res.contentType('application/json');
-    res.send(JSON.stringify({ message: "Hello, World!" }));
-});
 
 // Add GET HTTP Method to "/api/books" endpoint
 app.get('/api/books', (req, res) => {
