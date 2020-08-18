@@ -1,6 +1,5 @@
-// Import Express.js and Joi dependency
+// Import Express.js dependency
 const express = require('express');
-const Joi = require('joi');
 
 // Import home and books routes
 const home = require('./routes/home');
