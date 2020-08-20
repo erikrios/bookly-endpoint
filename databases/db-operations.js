@@ -1,6 +1,7 @@
 // Import db-connection
 const Book = require('./db-connection');
 
+// Add new document to database
 async function addBook(newBook) {
     const book = new Book({
         title: newBook.title,
@@ -18,6 +19,7 @@ async function addBook(newBook) {
     }
 }
 
+// Get all document
 async function getBooks() {
     try {
         return await Book.find();
@@ -30,7 +32,23 @@ async function getBooks() {
     }
 }
 
+// Get a document by id
+async function getBook(id) {
+    try {
+        return await Book.findOne({
+            _id: id
+        });
+    } catch (error) {
+        return {
+            errors: {
+                message: error
+            }
+        }
+    }
+}
+
 module.exports = {
     addBook: addBook,
-    getBooks: getBooks
+    getBooks: getBooks,
+    getBook: getBook
 }
