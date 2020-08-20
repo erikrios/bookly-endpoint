@@ -18,6 +18,19 @@ async function addBook(newBook) {
     }
 }
 
+async function getBooks() {
+    try {
+        return await Book.find();
+    } catch (error) {
+        return {
+            errors: {
+                message: error
+            }
+        }
+    }
+}
+
 module.exports = {
-    addBook: addBook
+    addBook: addBook,
+    getBooks: getBooks
 }
