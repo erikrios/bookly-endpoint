@@ -62,9 +62,10 @@ const books = [
 ]
 
 // Add GET HTTP Method to "/api/books" endpoint
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+    const result = await db.getBooks();
     res.contentType('application/json');
-    res.send(JSON.stringify(books));
+    res.send(JSON.stringify(result));
 });
 
 // Add GET HTTP Method to "/api/books/:id" endpoint
@@ -96,7 +97,7 @@ router.post('/', async (req, res) => {
     const result = await db.addBook(book);
 
     res.contentType('application/json');
-    res.send(result);
+    res.send(JSON.stringify(result));
 });
 
 // Add PUT HTTP Method to "/api/books/:id" endpoint
