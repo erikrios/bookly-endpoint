@@ -67,9 +67,23 @@ async function updateBook(id, newBook) {
     }
 }
 
+// Delete the document
+async function deleteBook(id) {
+    try {
+        return await Book.deleteOne({ _id: id })
+    } catch (error) {
+        return {
+            errors: {
+                message: error
+            }
+        }
+    }
+}
+
 module.exports = {
     addBook: addBook,
     getBooks: getBooks,
     getBook: getBook,
-    updateBook: updateBook
+    updateBook: updateBook,
+    deleteBook: deleteBook
 }
