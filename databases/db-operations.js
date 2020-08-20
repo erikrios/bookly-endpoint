@@ -1,5 +1,6 @@
 // Import db-connection
 const Book = require('./db-connection');
+const { func } = require('joi');
 
 // Add new document to database
 async function addBook(newBook) {
@@ -47,8 +48,28 @@ async function getBook(id) {
     }
 }
 
+// Update the document
+async function updateBook(id, newBook) {
+    try {
+        return await Book.findByIdAndUpdate(id, {
+            $set: {
+                title: newBook.title,
+                author: newBook.author,
+                publisher: newBook.publisher
+            }
+        }, { new: true });
+    } catch (error) {
+        return {
+            errors: {
+                message: error
+            }
+        }
+    }
+}
+
 module.exports = {
     addBook: addBook,
     getBooks: getBooks,
-    getBook: getBook
+    getBook: getBook,
+    updateBook: updateBook
 }
