@@ -59,8 +59,8 @@ async function updateBook(id, newBook) {
         }, { new: true });
     } catch (error) {
         return {
-            errors: {
-                message: error
+            error: {
+                message: error.reason.message
             }
         }
     }
@@ -72,8 +72,8 @@ async function deleteBook(id) {
         return await Book.deleteOne({ _id: id })
     } catch (error) {
         return {
-            errors: {
-                message: error
+            error: {
+                message: error.reason.message
             }
         }
     }

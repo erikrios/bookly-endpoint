@@ -49,7 +49,6 @@ router.post('/', async (req, res) => {
     }
 
     const result = await db.addBook(book);
-
     res.send(JSON.stringify(result));
 });
 
@@ -57,39 +56,55 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     res.contentType('application/json');
     const id = req.params.id;
+
+    const isExists = await db.isExists(id);
+
+    if (!isExists) {
+        res.status(404);
+        res.send(JSON.stringify({
+            error: {
+                message: `Book with id ${id} not found!`
+            }
+        }));
+        return;
+    }
+
     const book = req.body;
 
     const { error } = validate(book);
 
     if (error) {
         res.status(400);
-        res.send(error.details[0]);
+        res.send(JSON.stringify({
+            errors: {
+                message: error.details[0].message
+            }
+        }));
         return;
     }
 
-    const isExists = await db.isExists(id);
-
-    if (!isExists) {
-        res.status(404);
-        res.send(JSON.stringify({ error: `Book with id ${id} not found!` }));
-        return;
-    }
-
+    const result = await db.updateBook(id, book);
     res.send(JSON.stringify(result));
 });
 
 // Add DELETE HTTP Method to "/api/books/:id" endpoint
 router.delete('/:id', async (req, res) => {
+    res.contentType('application/json');
     const id = req.params.id;
-    const result = db.deleteBook(id);
 
-    if (!result) {
+    const isExists = await db.isExists(id);
+
+    if (!isExists) {
         res.status(404);
-        res.send(JSON.stringify({ error: `Book with id ${id} not found!` }));
+        res.send(JSON.stringify({
+            error: {
+                message: `Book with id ${id} not found!`
+            }
+        }));
         return;
     }
 
-    res.contentType('application/json');
+    const result = await db.deleteBook(id);
     res.send(JSON.stringify(result));
 });
 
