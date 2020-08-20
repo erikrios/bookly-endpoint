@@ -101,18 +101,11 @@ router.post('/', async (req, res) => {
 });
 
 // Add PUT HTTP Method to "/api/books/:id" endpoint
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
     res.contentType('application/json');
     const id = req.params.id;
-    const result = books.find(book => book.id === parseInt(id));
-
-    if (!result) {
-        res.status(404);
-        res.send(JSON.stringify({ error: `Book with id ${id} not found!` }));
-        return;
-    }
-
     const book = req.body;
+
     const { error } = validate(book);
 
     if (error) {
@@ -121,11 +114,15 @@ router.put('/:id', (req, res) => {
         return;
     }
 
-    result.title = book.title;
-    result.author = book.author;
-    result.publisher = book.publisher;
+    const result = await db.updateBook(id, book);
 
-    res.send(books);
+    if (!result) {
+        res.status(404);
+        res.send(JSON.stringify({ error: `Book with id ${id} not found!` }));
+        return;
+    }
+
+    res.send(JSON.stringify(result));
 });
 
 // Add DELETE HTTP Method to "/api/books/:id" endpoint
