@@ -3,46 +3,63 @@ const Joi = require('joi');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-// Create a connection to MongoDB
-mongoose.connect('mongodb://localhost/library', { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connected to MongoDB...'))
-    .catch(error => console.log('Could not connect to MongoDB', error));
-
-// Create book schema
-const bookSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true,
-        minlength: 3,
-        maxlength: 255
+const books = [
+    {
+        id: 1,
+        title: "Coders at Work : Reflections on the Craft of Programming",
+        author: [
+            "Peter Seibel"
+        ],
+        publisher: "APPRESS"
     },
-    author: {
-        type: Array,
-        validate: {
-            isAsync: true,
-            validator: function (v, callback) {
-                setTimeout(() => {
-                    const value = v && v.length > 0;
-                    callback(value);
-                }, 1000);
-            },
-            message: 'A book should have one author.'
-        }
+    {
+        id: 2,
+        title: "Head First: Design Patterns",
+        author: [
+            "Eric Freeman",
+            "Elisabeth Robson",
+            "Bert Bates",
+            "Kathy Sierra"
+        ],
+        publisher: "O'REILLY"
     },
-    publisher: {
-        type: String,
-        required: true,
-        minlength: 3,
-        maxlength: 255
+    {
+        id: 3,
+        title: "Head First HTML and CSS",
+        author: [
+            "Elisabeth Robson",
+            "Eric Freeman"
+        ],
+        publisher: "O'REILLY"
     },
-    date: {
-        type: Date,
-        default: Date.now
+    {
+        id: 4,
+        title: "Head First Java",
+        author: [
+            "Kathy Sierra",
+            "Bert Bates"
+        ],
+        publisher: "O'REILLY"
+    },
+    {
+        id: 5,
+        title: "MONSTER ARDUINO : Panduan Praktis Belajar Arduino untuk Pemula",
+        author: [
+            "Hari Santoso"
+        ],
+        publisher: "Elang Sakti"
+    },
+    {
+        id: 6,
+        title: "Head First Object-Oriented Analysis & Design",
+        author: [
+            "Brett D. McLaughlin",
+            "Gary Pollice",
+            "David West"
+        ],
+        publisher: "O'REILLY"
     }
-});
-
-// Create model class
-const Book = mongoose.model('Book', bookSchema);
+]
 
 // Add GET HTTP Method to "/api/books" endpoint
 router.get('/', (req, res) => {
