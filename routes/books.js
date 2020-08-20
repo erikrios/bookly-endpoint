@@ -83,7 +83,7 @@ router.get('/:id', (req, res) => {
 });
 
 // Add POST HTTP Method to "/api/books" endpoint
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     const book = req.body;
     const { error } = validate(book);
 
@@ -93,17 +93,10 @@ router.post('/', (req, res) => {
         return;
     }
 
-    books.push(
-        {
-            id: books.length + 1,
-            title: book.title,
-            author: book.author,
-            publisher: book.publisher
-        }
-    );
+    const result = await db.addBook(book);
 
     res.contentType('application/json');
-    res.send(books);
+    res.send(result);
 });
 
 // Add PUT HTTP Method to "/api/books/:id" endpoint

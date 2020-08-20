@@ -18,6 +18,6 @@ async function addBook(newBook) {
     }
 }
 
-module.exports.db = {
+module.exports = {
     addBook: addBook
 }
