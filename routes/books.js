@@ -126,9 +126,9 @@ router.put('/:id', async (req, res) => {
 });
 
 // Add DELETE HTTP Method to "/api/books/:id" endpoint
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
     const id = req.params.id;
-    const result = books.find(book => book.id === parseInt(id));
+    const result = db.deleteBook(id);
 
     if (!result) {
         res.status(404);
@@ -136,10 +136,8 @@ router.delete('/:id', (req, res) => {
         return;
     }
 
-    const index = books.indexOf(result);
-    books.splice(index, 1);
-
-    res.send(result);
+    res.contentType('application/json');
+    res.send(JSON.stringify(result));
 });
 
 // Add a function to validate the book
