@@ -79,6 +79,19 @@ async function deleteBook(id) {
     }
 }
 
+// Check the document exitst or not
+async function isExists(id) {
+    try {
+        return await Book.findById(id) > 0;
+    } catch (error) {
+        return {
+            errors: {
+                message: error
+            }
+        }
+    }
+}
+
 module.exports = {
     addBook: addBook,
     getBooks: getBooks,
