@@ -99,6 +99,9 @@ const bookSchema = new mongoose.Schema({
     }
 });
 
+// Create model class
+const Book = mongoose.model('Book', bookSchema);
+
 // Add GET HTTP Method to "/api/books" endpoint
 router.get('/', (req, res) => {
     res.contentType('application/json');
