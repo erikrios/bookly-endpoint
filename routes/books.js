@@ -32,18 +32,24 @@ router.get('/:id', async (req, res) => {
 
 // Add POST HTTP Method to "/api/books" endpoint
 router.post('/', async (req, res) => {
+    res.contentType('application/json');
     const book = req.body;
     const { error } = validate(book);
 
     if (error) {
         res.status(400);
-        res.send(error.details[0]);
+        res.send(JSON.stringify({
+            errors: [
+                {
+                    message: error.details[0].message
+                }
+            ]
+        }));
         return;
     }
 
     const result = await db.addBook(book);
 
-    res.contentType('application/json');
     res.send(JSON.stringify(result));
 });
 
@@ -61,9 +67,9 @@ router.put('/:id', async (req, res) => {
         return;
     }
 
-    const result = await db.updateBook(id, book);
+    const isExists = await db.isExists(id);
 
-    if (!result) {
+    if (!isExists) {
         res.status(404);
         res.send(JSON.stringify({ error: `Book with id ${id} not found!` }));
         return;
