@@ -25,8 +25,8 @@ async function getBooks() {
         return await Book.find();
     } catch (error) {
         return {
-            errors: {
-                message: error
+            error: {
+                message: error.reason.message
             }
         }
     }
@@ -40,8 +40,8 @@ async function getBook(id) {
         });
     } catch (error) {
         return {
-            errors: {
-                message: error
+            error: {
+                message: error.reason.message
             }
         }
     }
@@ -82,11 +82,13 @@ async function deleteBook(id) {
 // Check the document exitst or not
 async function isExists(id) {
     try {
-        return await Book.findById(id) > 0;
+        return await Book
+            .findById(id)
+            .count() > 0;
     } catch (error) {
         return {
-            errors: {
-                message: error
+            error: {
+                message: error.reason.message
             }
         }
     }
@@ -97,5 +99,6 @@ module.exports = {
     getBooks: getBooks,
     getBook: getBook,
     updateBook: updateBook,
-    deleteBook: deleteBook
+    deleteBook: deleteBook,
+    isExists: isExists
 }

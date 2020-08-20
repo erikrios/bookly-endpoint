@@ -14,14 +14,19 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     res.contentType('application/json');
     const id = req.params.id;
-    const result = await db.getBook(id);
+    const isExists = await db.isExists(id);
 
-    if (!result) {
+    if (!isExists) {
         res.status(404);
-        res.send(JSON.stringify({ error: `Book with id ${id} not found!` }));
+        res.send(JSON.stringify({
+            error: {
+                message: `Book with id ${id} not found!`
+            }
+        }));
         return;
     }
 
+    const result = await db.getBook(id);
     res.send(JSON.stringify(result));
 });
 
