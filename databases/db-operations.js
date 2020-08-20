@@ -1,6 +1,5 @@
 // Import db-connection
 const Book = require('./db-connection');
-const { func } = require('joi');
 
 // Add new document to database
 async function addBook(newBook) {
