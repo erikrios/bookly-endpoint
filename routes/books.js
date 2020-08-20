@@ -69,10 +69,10 @@ router.get('/', async (req, res) => {
 });
 
 // Add GET HTTP Method to "/api/books/:id" endpoint
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
     res.contentType('application/json');
     const id = req.params.id;
-    const result = books.find(book => book.id === parseInt(id));
+    const result = await db.getBook(id);
 
     if (!result) {
         res.status(404);
