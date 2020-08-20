@@ -17,3 +17,7 @@ async function addBook(newBook) {
         return { errors: errorResults };
     }
 }
+
+module.exports.db = {
+    addBook: addBook
+}
