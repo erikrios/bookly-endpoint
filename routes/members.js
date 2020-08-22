@@ -63,6 +63,9 @@ router.put('/:id', async (req, res) => {
                     'contact.phone': req.body.contact.phone,
                     'contact.email': req.body.contact.email
                 }
+            },
+            {
+                new: true
             }
         );
 
@@ -70,7 +73,7 @@ router.put('/:id', async (req, res) => {
         return res.send(member);
     }
 
-    let member = await Member.update({ _id: req.params.id }, { $set: { 'name': req.body.name } });
+    let member = await Member.update({ _id: req.params.id }, { $set: { 'name': req.body.name } }, { new: true });
     if (!member) return res.status(404).send('The member with the given ID was not found.');
     return res.send(member);
 });
