@@ -35,6 +35,8 @@ function validateBook(book) {
         authorId: Joi.string().length(24).required(),
         publisher: Joi.string().min(5).max(100).required()
     }
+
+    return Joi.validate(book, schema);
 }
 
 module.exports = {
