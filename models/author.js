@@ -25,5 +25,5 @@ function validateAuthor(author) {
 module.exports = {
     authorSchema: authorSchema,
     Author: Author,
-    validateAuthor: validateAuthor
+    validate: validateAuthor
 };
