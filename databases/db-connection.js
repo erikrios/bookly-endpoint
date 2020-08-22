@@ -22,6 +22,9 @@ const authorSchema = new mongoose.Schema({
     }
 });
 
+// Create model class
+const Author = mongoose.model('Author', authorSchema);
+
 // Create book schema
 const bookSchema = new mongoose.Schema({
     title: {
