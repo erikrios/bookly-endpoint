@@ -29,5 +29,5 @@ function validateMember(member) {
 module.exports = {
     memberSchema: memberSchema,
     Member: Member,
-    validate: validateMember
+    validateMember: validateMember
 };

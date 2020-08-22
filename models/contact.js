@@ -30,5 +30,5 @@ function validateContact(contact) {
 module.exports = {
     contactSchema = contactSchema,
     Contact = Contact,
-    validate = validateContact
+    validateContact = validateContact
 };
