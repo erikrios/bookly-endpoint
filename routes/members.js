@@ -76,7 +76,7 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-    const member = Member.findOneAndDelete({ _id: req.params.id });
+    const member = await Member.findOneAndDelete({ _id: req.params.id });
     if (!member) return res.status(404).send('The member with the given ID was not found.');
     return res.send(member);
 });
