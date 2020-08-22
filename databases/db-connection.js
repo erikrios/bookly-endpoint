@@ -5,6 +5,23 @@ mongoose.connect('mongodb://localhost/library', { useNewUrlParser: true, useUnif
     .then(() => console.log('Connected to MongoDB...'))
     .catch(error => console.log('Could not connect to MongoDB', error));
 
+// Create author schema
+const authorSchema = new mongoose.Schema({
+    author: {
+        type: Array,
+        validate: {
+            isAsync: true,
+            validator: function (v, callback) {
+                setTimeout(() => {
+                    const value = v && v.length > 0;
+                    callback(value);
+                }, 1000);
+            },
+            message: 'A book should have one author.'
+        }
+    }
+});
+
 // Create book schema
 const bookSchema = new mongoose.Schema({
     title: {
