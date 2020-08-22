@@ -33,7 +33,10 @@ const bookSchema = new mongoose.Schema({
         minlength: 3,
         maxlength: 255
     },
-    authors: [authorSchema],
+    authors: {
+        type: [authorSchema],
+        required: true
+    },
     publisher: {
         type: String,
         required: true,
@@ -49,4 +52,7 @@ const bookSchema = new mongoose.Schema({
 // Create model class
 const Book = mongoose.model('Book', bookSchema);
 
-module.exports = Book;
+module.exports = {
+    Author: Author,
+    Book: Book
+}
