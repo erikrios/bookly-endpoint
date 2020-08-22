@@ -32,7 +32,7 @@ const Book = mongoose.model('Book', bookSchema);
 function validateBook(book) {
     const schema = {
         title: Joi.string().min(5).max(100).required(),
-        authorId: Joi.string().length(24).required(),
+        authorId: Joi.array().items(Joi.string().length(24)).min(1).required(),
         publisher: Joi.string().min(5).max(100).required()
     }
 
