@@ -24,11 +24,12 @@ router.post('/', async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message);
 
     const authors = [];
-    req.body.authorsId.forEach(authorId => {
+    for (let index in req.body.authorsId) {
+        const authorId = req.body.authorsId[index];
         const author = await Author.findById(authorId).select('-__v');
         if (!author) return res.status(404).send('The author with the given ID was not found.');
         authors.push(author);
-    });
+    }
 
     let book = new Book({
         title: req.body.title,
@@ -45,11 +46,12 @@ router.put('/:id', async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message);
 
     const authors = [];
-    req.body.authorsId.forEach(authorId => {
+    for (let index in req.body.authorsId) {
+        const authorId = req.body.authorsId[index];
         const author = await Author.findById(authorId).select('-__v');
         if (!author) return res.status(404).send('The author with the given ID was not found.');
         authors.push(author);
-    });
+    }
 
     const book = await Book.findByIdAndUpdate(req.params.id, {
         title: req.body.title,
