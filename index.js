@@ -18,9 +18,10 @@ const app = express();
 // Add JSON middleware
 app.use(express.json());
 
-// Add home and books routes middleware
+// Add home, books, and members routes middleware
 app.use('/', home);
 app.use('/api/books', books);
+app.use('/api/members', members);
 
 // Create PORT
 const port = process.env.PORT || 3000;
