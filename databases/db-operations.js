@@ -5,7 +5,7 @@ const { Author, Book } = require('./db-connection');
 async function addBook(newBook) {
     const book = new Book({
         title: newBook.title,
-        author: newBook.author,
+        authors: newBook.authors,
         publisher: newBook.publisher
     });
 
@@ -53,7 +53,7 @@ async function updateBook(id, newBook) {
         return await Book.findByIdAndUpdate(id, {
             $set: {
                 title: newBook.title,
-                author: newBook.author,
+                authors: newBook.authors,
                 publisher: newBook.publisher
             }
         }, { new: true });
