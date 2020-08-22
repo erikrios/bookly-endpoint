@@ -21,6 +21,7 @@ app.use(express.json());
 
 // Add home, books, members, authors routes middleware
 app.use('/', home);
+app.use('/api/books', books);
 app.use('/api/members', members);
 app.use('/api/authors', authors);
 
