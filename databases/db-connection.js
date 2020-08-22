@@ -33,19 +33,7 @@ const bookSchema = new mongoose.Schema({
         minlength: 3,
         maxlength: 255
     },
-    author: {
-        type: Array,
-        validate: {
-            isAsync: true,
-            validator: function (v, callback) {
-                setTimeout(() => {
-                    const value = v && v.length > 0;
-                    callback(value);
-                }, 1000);
-            },
-            message: 'A book should have one author.'
-        }
-    },
+    authors: [authorSchema],
     publisher: {
         type: String,
         required: true,
