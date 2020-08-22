@@ -21,7 +21,8 @@ const Member = mongoose.model('Member', memberSchema);
 
 function validateMember(member) {
     const schema = {
-        name: Joi.string().min(5).max(50).required()
+        name: Joi.string().min(5).max(50).required(),
+        contact: Joi.object().pattern(Joi.string(), Joi.string())
     }
 
     return Joi.validate(member, schema);
