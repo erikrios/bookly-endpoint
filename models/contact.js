@@ -6,12 +6,14 @@ const contactSchema = new mongoose.Schema({
     phone: {
         type: String,
         minlength: 10,
-        maxlength: 12
+        maxlength: 12,
+        required: true
     },
     email: {
         type: String,
         minlength: 5,
-        maxlength: 50
+        maxlength: 50,
+        required: true
     }
 });
 
@@ -20,8 +22,8 @@ const Contact = mongoose.model('Contact', contactSchema);
 
 function validateContact(contact) {
     const schema = {
-        phone: Joi.string().min(10).max(12),
-        email: Joi.string().min(5).max(50)
+        phone: Joi.string().min(10).max(12).required(),
+        email: Joi.string().min(5).max(50).required()
     };
 
     return Joi.validate(contact, schema);
