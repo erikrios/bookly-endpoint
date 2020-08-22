@@ -2,9 +2,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-// Import home and books routes
+// Import home, books, and members routes
 const home = require('./routes/home');
 const books = require('./routes/books');
+const members = require('./routes/members');
 
 // Create a connection to MongoDB
 mongoose.connect('mongodb://localhost/library', { useNewUrlParser: true, useUnifiedTopology: true })
