@@ -18,3 +18,16 @@ const memberSchema = new mongoose.Schema({
 // Create member model
 const Member = mongoose.model('Member', memberSchema);
 
+function validateMember(member) {
+    const schema = {
+        name: Joi.string().min(5).max(50).required()
+    }
+
+    return Joi.validate(member, schema);
+}
+
+module.exports = {
+    memberSchema: memberSchema,
+    Member: Member,
+    validateMember: validateMember
+};
