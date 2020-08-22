@@ -1,9 +1,15 @@
-// Import Express.js dependency
+// Import Express.js and Mongoose dependency
 const express = require('express');
+const mongoose = require('mongoose');
 
 // Import home and books routes
 const home = require('./routes/home');
 const books = require('./routes/books');
+
+// Create a connection to MongoDB
+mongoose.connect('mongodb://localhost/library', { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Connected to MongoDB...'))
+    .catch(error => console.log('Could not connect to MongoDB', error));
 
 // Create the instance of express
 const app = express();
