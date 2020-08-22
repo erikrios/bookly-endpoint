@@ -1,5 +1,5 @@
 // Import db-connection
-const Book = require('./db-connection');
+const { Author, Book } = require('./db-connection');
 
 // Add new document to database
 async function addBook(newBook) {
