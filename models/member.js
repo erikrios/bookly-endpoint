@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
+const { contactSchema } = require('./contact');
 
 // Create member schema
 const memberSchema = new mongoose.Schema({
@@ -14,5 +15,6 @@ const memberSchema = new mongoose.Schema({
     }
 });
 
-
 // Create member model
+const Member = mongoose.model('Member', memberSchema);
+

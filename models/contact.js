@@ -18,7 +18,17 @@ const contactSchema = new mongoose.Schema({
 // Create contact model
 const Contact = mongoose.model('Contact', contactSchema);
 
+function validateContact(contact) {
+    const schema = {
+        phone: Joi.string().min(10).max(12),
+        email: Joi.string().min(5).max(50)
+    };
+
+    return Joi.validate(contact, schema);
+}
+
 module.exports = {
     contactSchema = contactSchema,
-    Contact = Contact
-}
+    Contact = Contact,
+    validateContact = validateContact
+};

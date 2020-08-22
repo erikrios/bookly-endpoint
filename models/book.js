@@ -42,4 +42,4 @@ function validateBook(book) {
 module.exports = {
     Book: Book,
     validateBook: validateBook
-}
+};

@@ -26,4 +26,4 @@ module.exports = {
     authorSchema: authorSchema,
     Author: Author,
     validateAuthor: validateAuthor
-}
+};
