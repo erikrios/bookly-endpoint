@@ -20,7 +20,6 @@ app.use(express.json());
 
 // Add home, books, and members routes middleware
 app.use('/', home);
-app.use('/api/books', books);
 app.use('/api/members', members);
 
 // Create PORT
