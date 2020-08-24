@@ -44,4 +44,4 @@ function validateBorrow(borrow) {
 module.exports = {
     Borrow: Borrow,
     validate: validateBorrow
-}
+};
