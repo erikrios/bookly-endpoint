@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
             name: member.name
         },
         book: {
-            _id: (await book)._id,
+            _id: book._id,
             title: book.title
         }
     });
