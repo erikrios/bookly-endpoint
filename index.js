@@ -20,11 +20,12 @@ const app = express();
 // Add JSON middleware
 app.use(express.json());
 
-// Add home, books, members, authors routes middleware
+// Add home, books, members, authors, and borrows routes middleware
 app.use('/', home);
 app.use('/api/books', books);
 app.use('/api/members', members);
 app.use('/api/authors', authors);
+app.use('/api/borrows', borrows);
 
 // Create PORT
 const port = process.env.PORT || 3000;
