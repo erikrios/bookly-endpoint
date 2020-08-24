@@ -18,11 +18,13 @@ router.post('/', async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0]).message;
 
-    const member = Member.findById(req.body.memberId);
+    const member = await Member.findById(req.body.memberId);
     if (!member) return res.status(400).send('Invalid member.');
+    console.log(member);
 
-    const book = Book.findById(req.body.bookId);
+    const book = await Book.findById(req.body.bookId);
     if (!book) return res.status(400).send('Invalid book.');
+    console.log(book);
 
     if (book.numberInStock === 0) return res.status(400).send('Book not in stock.');
 
@@ -49,12 +51,6 @@ router.post('/', async (req, res) => {
     } catch (error) {
         res.status(500).send('Something failed.');
     }
-    borrow = await borrow.save();
-
-    book.numberInStock--;
-    book.save();
-
-    res.send(borrow);
 });
 
 router.get('/:id', async (req, res) => {
