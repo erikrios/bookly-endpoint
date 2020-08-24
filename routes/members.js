@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
     if (req.body.contact) {
         const { error } = validateContact(req.body.contact);
         if (error) return res.status(400).send(error.details[0].message);
-        let member = new Member({
+        const member = new Member({
             name: req.body.name,
             contact: new Contact({
                 phone: req.body.contact.phone,
@@ -33,15 +33,15 @@ router.post('/', async (req, res) => {
             })
         });
 
-        member = await member.save();
+        await member.save();
         return res.send(member);
     }
 
-    let member = new Member({
+    const member = new Member({
         name: req.body.name
     });
 
-    member = await member.save();
+    await member.save();
     return res.send(member);
 });
 

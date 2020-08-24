@@ -31,14 +31,14 @@ router.post('/', async (req, res) => {
         authors.push(author);
     }
 
-    let book = new Book({
+    const book = new Book({
         title: req.body.title,
         authors: authors,
         publisher: req.body.publisher,
         numberInStock: req.body.numberInStock
     });
 
-    book = await book.save();
+    await book.save();
     return res.send(book);
 });
 

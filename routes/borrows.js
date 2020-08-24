@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
 
     if (book.numberInStock === 0) return res.status(400).send('Book not in stock.');
 
-    let borrow = new Borrow({
+    const borrow = new Borrow({
         member: {
             _id: member._id,
             name: member.name
