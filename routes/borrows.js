@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
 const express = require('express');
+const Fawn = require('fawn');
 const { Borrow, validate } = require('../models/borrow');
 const { Member } = require('../models/member');
 const { Book } = require('../models/book');
 
 const router = express.Router();
+
+Fawn.init(mongoose);
 
 router.get('/', async (req, res) => {
     const borrows = await Borrow.find().sort('-dateOut');
