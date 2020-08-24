@@ -16,7 +16,7 @@ const Borrow = mongoose.model('Borrow', new mongoose.Schema({
     book: {
         type: new mongoose.Schema({
             title: {
-                ype: String,
+                type: String,
                 required: true,
                 minlength: 5,
                 maxlength: 255
