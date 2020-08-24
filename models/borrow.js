@@ -1,4 +1,5 @@
 const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 const mongoose = require('mongoose');
 
 const Borrow = mongoose.model('Borrow', new mongoose.Schema({
@@ -36,8 +37,8 @@ const Borrow = mongoose.model('Borrow', new mongoose.Schema({
 
 function validateBorrow(borrow) {
     const schema = {
-        memberId: Joi.string().length(24).required(),
-        bookId: Joi.string().length(24).required()
+        memberId: Joi.objectId().required(),
+        bookId: Joi.objectId().required()
     }
 
     return Joi.validate(borrow, schema);
