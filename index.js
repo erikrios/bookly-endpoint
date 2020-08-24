@@ -4,12 +4,13 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
-// Import home, books, members, authors, and borrows routes
+// Import home, books, members, authors, borrows, and users routes
 const home = require('./routes/home');
 const books = require('./routes/books');
 const members = require('./routes/members');
 const authors = require('./routes/authors');
 const borrows = require('./routes/borrows');
+const users = require('./routes/users');
 
 // Create a connection to MongoDB
 mongoose.connect('mongodb://localhost/library', { useNewUrlParser: true, useUnifiedTopology: true })
