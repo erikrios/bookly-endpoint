@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
     });
 
     await book.save();
-    return res.send(book);
+    res.send(book);
 });
 
 router.put('/:id', async (req, res) => {

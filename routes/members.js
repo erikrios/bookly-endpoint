@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
     });
 
     await member.save();
-    return res.send(member);
+    res.send(member);
 });
 
 router.put('/:id', async (req, res) => {
@@ -74,13 +74,13 @@ router.put('/:id', async (req, res) => {
 
     let member = await Member.update({ _id: req.params.id }, { $set: { 'name': req.body.name } }, { new: true });
     if (!member) return res.status(404).send('The member with the given ID was not found.');
-    return res.send(member);
+    res.send(member);
 });
 
 router.delete('/:id', async (req, res) => {
     const member = await Member.findOneAndDelete({ _id: req.params.id });
     if (!member) return res.status(404).send('The member with the given ID was not found.');
-    return res.send(member);
+    res.send(member);
 });
 
 module.exports = router;

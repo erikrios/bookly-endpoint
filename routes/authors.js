@@ -15,7 +15,7 @@ router.get('/:id', async (req, res) => {
 
     if (!author) return res.status(404).send('The author with the given ID was not found.');
 
-    return res.send(author);
+    res.send(author);
 });
 
 router.post('/', async (req, res) => {
@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
     });
 
     await author.save();
-    return res.send(author);
+    res.send(author);
 });
 
 router.put('/:id', async (req, res) => {
