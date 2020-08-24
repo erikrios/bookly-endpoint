@@ -29,7 +29,7 @@ app.use('/api/books', books);
 app.use('/api/members', members);
 app.use('/api/authors', authors);
 app.use('/api/borrows', borrows);
-app.user('/api/users', users);
+app.use('/api/users', users);
 
 // Create PORT
 const port = process.env.PORT || 3000;
