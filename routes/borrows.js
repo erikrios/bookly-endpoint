@@ -20,11 +20,9 @@ router.post('/', async (req, res) => {
 
     const member = await Member.findById(req.body.memberId);
     if (!member) return res.status(400).send('Invalid member.');
-    console.log(member);
 
     const book = await Book.findById(req.body.bookId);
     if (!book) return res.status(400).send('Invalid book.');
-    console.log(book);
 
     if (book.numberInStock === 0) return res.status(400).send('Book not in stock.');
 
@@ -54,7 +52,8 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-    const borrow = Borrow.findById(req.params.id);
+    const id = req.params.id;
+    const borrow = await Borrow.findById(id);
 
     if (!borrow) return res.status(404).send('The borrow with the given ID was not found.');
 
