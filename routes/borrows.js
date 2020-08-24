@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
 
         res.send(borrow);
     } catch (error) {
-        res.status(500).send('Something failed');
+        res.status(500).send('Something failed.');
     }
     borrow = await borrow.save();
 
