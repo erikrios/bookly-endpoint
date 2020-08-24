@@ -37,6 +37,18 @@ router.post('/', async (req, res) => {
         }
     });
 
+    try {
+        new Fawn.Task()
+            .save('borrows', borrow)
+            .update('books', { _id: book._id }, {
+                $inc: { numberInStock: -1 }
+            })
+            .run();
+
+        res.send(borrow);
+    } catch (error) {
+        res.status(500).send('Something failed');
+    }
     borrow = await borrow.save();
 
     book.numberInStock--;
