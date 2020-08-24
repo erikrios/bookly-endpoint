@@ -34,7 +34,8 @@ router.post('/', async (req, res) => {
     let book = new Book({
         title: req.body.title,
         authors: authors,
-        publisher: req.body.publisher
+        publisher: req.body.publisher,
+        numberInStock: req.body.numberInStock
     });
 
     book = await book.save();
@@ -56,7 +57,8 @@ router.put('/:id', async (req, res) => {
     const book = await Book.findByIdAndUpdate(req.params.id, {
         title: req.body.title,
         authors: authors,
-        publisher: req.body.publisher
+        publisher: req.body.publisher,
+        numberInStock: req.body.numberInStock
     }, { new: true });
 
     if (!book) return res.status(404).send('The book with the given ID was not found.');
