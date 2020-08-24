@@ -39,6 +39,8 @@ function validateBorrow(borrow) {
         memberId: Joi.string().length(24).required(),
         bookId: Joi.string().length(24).required()
     }
+
+    return Joi.validate(borrow, schema);
 }
 
 module.exports = {
