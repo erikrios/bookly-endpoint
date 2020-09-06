@@ -22,6 +22,11 @@ mongoose.connect('mongodb://localhost/library', { useNewUrlParser: true, useUnif
 // Create the instance of express
 const app = express();
 
+if (!config.get('jwtPrivateKey')) {
+    console.error('FATAL ERROR: jwtPrivateKey is not defined.');
+    process.exit(1);
+}
+
 // Add JSON middleware
 app.use(express.json());
 
