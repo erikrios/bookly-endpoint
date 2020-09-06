@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const { Author, validate } = require('../models/author');
 const auth = require('../middleware/auth');
+const admin = require('../middleware/admin');
 
 const router = express.Router();
 
