@@ -1,7 +1,8 @@
-// Import Express.js, Mongoose, and Joi dependency
+// Import Express.js, Mongoose, Joi, and config dependency
 const express = require('express');
 const mongoose = require('mongoose');
 const Joi = require('joi');
+const config = require('config');
 Joi.objectId = require('joi-objectid')(Joi);
 
 // Import home, books, members, authors, borrows, users, and auth routes
