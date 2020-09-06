@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const config = require('config');
 const mongoose = require('mongoose');
 const express = require('express');
 const _ = require('lodash');
