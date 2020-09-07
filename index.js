@@ -1,7 +1,6 @@
-// Import Express.js and Joi dependency
+// Import Express.js and winston dependency
 const express = require('express');
-const Joi = require('joi');
-Joi.objectId = require('joi-objectid')(Joi);
+const winston = require('winston');
 
 // Create the instance of express
 const app = express();
@@ -9,8 +8,9 @@ const app = express();
 require('./startup/logging')();
 require('./startup/routes')(app);
 require('./startup/db')();
-require('./startup/config');
+require('./startup/config')();
+require('./startup/validation')();
 
 // Create PORT
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server running on port ${port}...`));
+app.listen(port, () => winston.info(`Server running on port ${port}...`));
