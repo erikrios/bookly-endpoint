@@ -3,17 +3,18 @@ const express = require('express');
 const { Author, validate } = require('../models/author');
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
+const asyncMiddleware = require('../middleware/async');
 
 const router = express.Router();
 
-router.get('/', async (req, res, next) => {
+router.get('/', asyncMiddleware(async (req, res, next) => {
     try {
         const authors = await Author.find().sort('name');
         res.send(authors);
     } catch (ex) {
         next(ex);
     }
-});
+}));
 
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
@@ -24,7 +25,7 @@ router.get('/:id', async (req, res) => {
     res.send(author);
 });
 
-router.post('/', auth, async (req, res) => {
+router.post('/', auth, asyncMiddleware(async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
@@ -34,7 +35,7 @@ router.post('/', auth, async (req, res) => {
 
     await author.save();
     res.send(author);
-});
+}));
 
 router.put('/:id', async (req, res) => {
     const { error } = validate(req.body);
