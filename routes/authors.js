@@ -6,12 +6,12 @@ const admin = require('../middleware/admin');
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
     try {
         const authors = await Author.find().sort('name');
         res.send(authors);
     } catch (ex) {
-        res.status(500).send('Something failed.');
+        next(ex);
     }
 });
 
