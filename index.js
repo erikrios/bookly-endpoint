@@ -26,6 +26,11 @@ mongoose.connect('mongodb://localhost/library', { useNewUrlParser: true, useUnif
 // Create the instance of express
 const app = express();
 
+process.on('uncaughtException', (ex) => {
+    console.log('WE GOT AN UNCAUGHT EXCEPTION');
+    winston.error(ex.message, ex);
+});
+
 winston.add(winston.transports.File, { filename: 'logfile.log' });
 winston.add(winston.transports.MongoDB, {
     db: 'mongodb://localhost/library',
