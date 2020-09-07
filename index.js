@@ -39,6 +39,7 @@ app.use('/api/authors', authors);
 app.use('/api/borrows', borrows);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
+app.use(error);
 
 // Create PORT
 const port = process.env.PORT || 3000;
