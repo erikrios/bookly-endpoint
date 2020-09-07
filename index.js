@@ -8,16 +8,6 @@ require('express-async-errors');
 const winston = require('winston');
 require('winston-mongodb');
 
-// Import home, books, members, authors, borrows, users, and auth routes
-const home = require('./routes/home');
-const books = require('./routes/books');
-const members = require('./routes/members');
-const authors = require('./routes/authors');
-const borrows = require('./routes/borrows');
-const users = require('./routes/users');
-const auth = require('./routes/auth');
-const error = require('./middleware/error');
-
 // Create a connection to MongoDB
 mongoose.connect('mongodb://localhost/library', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to MongoDB...'))
@@ -25,6 +15,8 @@ mongoose.connect('mongodb://localhost/library', { useNewUrlParser: true, useUnif
 
 // Create the instance of express
 const app = express();
+
+require('./startup/routes')(app);
 
 winston.handleExceptions(new winston.transports.File({ filename: 'uncaughtExceptions.log' }));
 
@@ -42,19 +34,6 @@ if (!config.get('jwtPrivateKey')) {
     console.error('FATAL ERROR: jwtPrivateKey is not defined.');
     process.exit(1);
 }
-
-// Add JSON middleware
-app.use(express.json());
-
-// Add home, books, members, authors, borrows, users, and auth routes middleware
-app.use('/', home);
-app.use('/api/books', books);
-app.use('/api/members', members);
-app.use('/api/authors', authors);
-app.use('/api/borrows', borrows);
-app.use('/api/users', users);
-app.use('/api/auth', auth);
-app.use(error);
 
 // Create PORT
 const port = process.env.PORT || 3000;
