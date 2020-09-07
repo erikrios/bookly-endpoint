@@ -7,8 +7,12 @@ const admin = require('../middleware/admin');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const authors = await Author.find().sort('name');
-    res.send(authors);
+    try {
+        const authors = await Author.find().sort('name');
+        res.send(authors);
+    } catch (ex) {
+        res.status(500).send('Something failed.');
+    }
 });
 
 router.get('/:id', async (req, res) => {
