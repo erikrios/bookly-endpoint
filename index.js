@@ -13,6 +13,7 @@ const authors = require('./routes/authors');
 const borrows = require('./routes/borrows');
 const users = require('./routes/users');
 const auth = require('./routes/auth');
+const error = require('./middleware/error');
 
 // Create a connection to MongoDB
 mongoose.connect('mongodb://localhost/library', { useNewUrlParser: true, useUnifiedTopology: true })
