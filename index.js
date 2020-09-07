@@ -25,6 +25,8 @@ mongoose.connect('mongodb://localhost/library', { useNewUrlParser: true, useUnif
 // Create the instance of express
 const app = express();
 
+winston.add(winston.transport.File, { filename: 'logfile.log' });
+
 if (!config.get('jwtPrivateKey')) {
     console.error('FATAL ERROR: jwtPrivateKey is not defined.');
     process.exit(1);
