@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 const config = require('config');
 Joi.objectId = require('joi-objectid')(Joi);
+require('express-async-errors');
 
 // Import home, books, members, authors, borrows, users, and auth routes
 const home = require('./routes/home');
