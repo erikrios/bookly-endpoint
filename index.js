@@ -5,6 +5,7 @@ const Joi = require('joi');
 const config = require('config');
 Joi.objectId = require('joi-objectid')(Joi);
 require('express-async-errors');
+const winston = require('winston');
 
 // Import home, books, members, authors, borrows, users, and auth routes
 const home = require('./routes/home');
