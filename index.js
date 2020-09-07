@@ -1,6 +1,5 @@
-// Import Express.js, Mongoose, Joi, and config dependency
+// Import Express.js, Joi, and config dependency
 const express = require('express');
-const mongoose = require('mongoose');
 const Joi = require('joi');
 const config = require('config');
 Joi.objectId = require('joi-objectid')(Joi);
@@ -8,15 +7,11 @@ require('express-async-errors');
 const winston = require('winston');
 require('winston-mongodb');
 
-// Create a connection to MongoDB
-mongoose.connect('mongodb://localhost/library', { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connected to MongoDB...'))
-    .catch(error => console.log('Could not connect to MongoDB', error));
-
 // Create the instance of express
 const app = express();
 
 require('./startup/routes')(app);
+require('./startup/db')();
 
 winston.handleExceptions(new winston.transports.File({ filename: 'uncaughtExceptions.log' }));
 
