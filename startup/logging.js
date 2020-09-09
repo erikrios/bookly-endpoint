@@ -14,7 +14,7 @@ module.exports = function () {
 
     winston.add(winston.transports.File, { filename: 'logfile.log' });
     winston.add(winston.transports.MongoDB, {
-        db: 'mongodb://localhost/library',
+        db: 'bookly_db=mongodb+srv://bookly-user:A#T2Ew8b65@clusterbookly.rturt.mongodb.net/library?retryWrites=true&w=majority',
         level: 'info'
     });
 }
