@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 module.exports = function () {
     // Create a connection to MongoDB
-    mongoose.connect('mongodb://localhost/library', { useNewUrlParser: true, useUnifiedTopology: true })
+    const db = config.get('db');
+    mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
         .then(() => winston.info('Connected to MongoDB...'));
 }
